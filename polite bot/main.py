@@ -48,7 +48,7 @@ def compliment(message):
         if "комплимент" in message.text.lower():
             bot.send_message(message.chat.id, message.from_user.first_name + rnd.choice(nice_things))
             
-    @bot.message_handler(func=lambda message: True and  "какие шансы" in  message.text.lower() , content_types=['text'])
+    @bot.message_handler(func=lambda message: True and  "получится ли" in  message.text.lower() , content_types=['text'])
     def get_start(message):
         bot.send_message(message.chat.id, cho(), reply_to_message_id = message.message_id)
      

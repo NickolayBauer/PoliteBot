@@ -7,6 +7,11 @@ import re
 token = "_your token_"
 bot = telebot.TeleBot(token)
 
+mass_word = ['нет',
+             'возможно',
+             'вполне вероятно',
+             'сокрее да, чем нет',
+             'да']
 
 def censor(msg):
     flag = False
@@ -18,6 +23,9 @@ def censor(msg):
             flag = True
 
     return flag
+
+def cho():
+    return rnd.choice(mass_word)
 
 @bot.message_handler(commands=['PoliteBot'])
 def compliment(message):
@@ -39,6 +47,11 @@ def compliment(message):
 
         if "комплимент" in message.text.lower():
             bot.send_message(message.chat.id, message.from_user.first_name + rnd.choice(nice_things))
+            
+    @bot.message_handler(func=lambda message: True and  "какие шансы" in  message.text.lower() , content_types=['text'])
+    def get_start(message):
+        bot.send_message(message.chat.id, cho(), reply_to_message_id = message.message_id)
+     
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
